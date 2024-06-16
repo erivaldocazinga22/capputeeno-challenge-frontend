@@ -17,6 +17,11 @@ Bem-vindo ao projeto Capputeeno Challenge Frontend! Este projeto foi criado como
 - **Axios**: Para fazer requisições HTTP aos serviços backend.
 - **React Router Dom**: Para gerenciamento de navegação dentro da aplicação.
 
+
+# 🧠 Contexto
+
+![Protótipo](https://storage.googleapis.com/xesque-dev/challenge-images/prototipo.png?42)
+
 ## Primeiros Passos
 
 Siga estas instruções para configurar e executar o projeto na sua máquina local.
