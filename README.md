@@ -19,6 +19,7 @@ Bem-vindo ao projeto Capputeeno Challenge Frontend! Este projeto foi criado como
 
 
 # 🧠 Contexto
+- preview : https://capputeeno-challenge-frontend.vercel.app/
 
 ![Protótipo](https://storage.googleapis.com/xesque-dev/challenge-images/prototipo.png?42)
 
