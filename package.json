@@ -21,6 +21,7 @@
     "@vercel/node": "^5.0.0",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
+    "cors": "^2.8.5",
     "json-server": "^1.0.0-beta.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -31,6 +32,7 @@
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
     "@tanstack/eslint-plugin-query": "^5.43.1",
+    "@types/cors": "^2.8.17",
     "@types/json-server": "^0.14.7",
     "@types/node": "^20.14.2",
     "@types/react": "^18.2.66",
