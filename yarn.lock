@@ -1220,7 +1220,7 @@
     node-gyp-build "^4.2.2"
     resolve-from "^5.0.0"
 
-"@vercel/node@5.0.0":
+"@vercel/node@5.0.0", "@vercel/node@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@vercel/node/-/node-5.0.0.tgz#c69c683c6519c9c00f40e46a28f9f835eca3f74c"
   integrity sha512-l917aGyDkaOhqfDrYSqy9sjd+Pv6K8mCsVyxzGv4kwmbhERpi8rS6aBmfIf4fDevEPYiOasftPHASbdnyHOe/g==
