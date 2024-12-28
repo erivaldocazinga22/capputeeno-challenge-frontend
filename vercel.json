@@ -2,14 +2,18 @@
     "version": 2,
     "builds": [
       {
-        "src": "src/api/db.ts",
+        "src": "functions/api/**/*.ts",
         "use": "@vercel/node"
+      },
+      {
+        "src": "vite.config.ts",
+        "use": "@vercel/static-build"
       }
     ],
     "routes": [
       {
-        "src": "/api/.*",
-        "dest": "/src/api/db.ts"
+        "src": "/api/(.*)",
+        "dest": "/functions/api/$1"
       }
     ]
   }
