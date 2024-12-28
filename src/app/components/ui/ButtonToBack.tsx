@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import IconBack from "@/assets/Back.svg";
+import { ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ButtonToBackProps extends React.HTMLAttributes<HTMLButtonElement>{
@@ -7,7 +7,7 @@ interface ButtonToBackProps extends React.HTMLAttributes<HTMLButtonElement>{
     text?: string
 }
 
-export const ButtonToBack = ({text="Voltar", iconSrc, className, ...props}: ButtonToBackProps) => {
+export const ButtonToBack = ({text="Voltar", className, ...props}: ButtonToBackProps) => {
     const location = useLocation();
 
     const ToBackFn = ()=> {
@@ -17,7 +17,7 @@ export const ButtonToBack = ({text="Voltar", iconSrc, className, ...props}: Butt
 
     return (
         <button type="button" className={cn("flex items-center gap-1", className)} {...props} onClick={ToBackFn}>
-            <img src={iconSrc??IconBack} alt="" />
+            <ArrowLeft />
             <span>{text}</span>
         </button>
     )

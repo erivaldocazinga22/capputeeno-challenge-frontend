@@ -2,23 +2,23 @@ import { ShoppingBag } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 import { cn } from "@/lib/utils";
-import { useProducts } from "@/core/hooks/products";
 import { useCart } from "@/core/contexts/cart/cartContext";
 import { ButtonToBack } from "@/app/components/ui/ButtonToBack";
+import { useProducts } from "@/core/hooks/products";
 
 export default function Product() {
     const location = useLocation();
     const prodId = location.pathname.split("/")[2];
-
     const { cartItems, addItemToCart } = useCart();
-    const { data: AllProducts } = useProducts();
+
+    const { data: allProducts } = useProducts();
     
     return (
         <div className=" md:mb-0 px-2 lg:w-4/5 lg:mx-auto h-[calc(100vh-5rem)] overflow-y-auto">
             <div className="my-4">
                 <ButtonToBack />
             </div>
-            {AllProducts?.map((product)=> product.id === prodId && (
+            {allProducts?.map((product)=> product.id === prodId && (
                 <div className="flex flex-col md:flex-row gap-4 mb-5" key={product.id}>
                     <div className="flex-1 w-full min-h-[10rem] min-w-[10rem] md:h-[calc(100vh-5rem-5rem)] rounded-md flex items-center justify-center overflow-hidden bg-slate-400">
                         <img src={product.image_url} alt="" className="w-full h-full object-cover object-center" />
@@ -28,8 +28,8 @@ export default function Product() {
                             <div className="space-y-4">
                                 <legend>{product.name.split(" ")[0]}</legend>
                                 <h1 className="text-2xl">{product.name}</h1>
-                                <span className="block text-lg font-bold">{product.price_in_cents}</span>
-                                <p className="text-sm font-medium text-justify">*Frete de R$40,00 para todo o Brasil. Grátis para compras acima de R$900,00.</p>
+                                <span className="block text-lg font-bold">{product.price_in_cents.toLocaleString("pt-AO", { style: "currency", currency: "AOA" })}</span>
+                                <p className="text-sm font-medium text-justify">*Frete de {(1500).toLocaleString("pt-AO", { style: "currency", currency: "AOA" })} para todo o Brasil. Grátis para compras acima de {(5000).toLocaleString("pt-AO", { style: "currency", currency: "AOA" })}.</p>
                             </div>
 
                             <div>

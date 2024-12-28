@@ -6,7 +6,7 @@ import { ProductCartStorage } from "@/core/models/cart";
 interface CartContextValues {
     cartItems: ProductCartStorage[],
     addItemToCart: (product: IProduct) => void,
-    updateCartItem: (cartItem: ProductCartStorage, quantity: number) => void,
+    updateCartItem: (itemId: string, quantity: number) => void,
     removeItemFromCart: (productId: string) => void,
     completePurchase: () => void
 }

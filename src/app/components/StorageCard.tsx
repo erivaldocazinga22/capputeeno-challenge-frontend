@@ -22,14 +22,14 @@ export const StorageCard = ({ data: cartItem }: StorageCardProps) => {
                 </div>
                 <p className="text-sm text-justify break-all line-clamp-3 ">{cartItem.description}</p>
                 <div className="flex items-center justify-between">
-                    <select value={cartItem.quantity} onChange={({ target })=> updateCartItem(cartItem, +target.value)
+                    <select defaultValue={cartItem.quantity} onChange={({ target })=> updateCartItem(cartItem.id, +target.value)
                     } className="p-2 min-w-14 border border-slate-300 rounded-md">
                         {Array.from({ length: 10}).map((_,index) => (
-                            <option key={index} value={index}>{index}</option>
+                            <option key={index} value={index + 1}>{index + 1}</option>
                         ))}
                     </select>
                     <div>
-                        <span className="text-lg font-bold">{cartItem.price_in_cents}</span>
+                        <span className="text-lg font-bold">{cartItem.price_in_cents.toLocaleString("pt-AO", { style: "currency", currency: "AOA"})}</span>
                     </div>
                 </div>
             </div>

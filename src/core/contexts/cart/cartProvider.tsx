@@ -2,6 +2,7 @@ import { useEffect, useState, ReactNode } from "react";
 import { CartContext } from "./cartContext";
 import { IProduct } from "@/core/models/products";
 import { ProductCartStorage } from "@/core/models/cart";
+import toast from "react-hot-toast";
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [cartItems, setCartItems] = useState<ProductCartStorage[]>([]);
@@ -16,7 +17,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
     const addItemToCart = (cartItem: IProduct) => {
         setCartItems(prevCart => {
-            let newCart: ProductCartStorage[] = [...prevCart, {...cartItem, quantity: 1}];
+            const newCart: ProductCartStorage[] = [...prevCart, {...cartItem, quantity: 1}];
             localStorage.setItem("cart.capputeeno", JSON.stringify(newCart));
             return newCart;
         })
@@ -33,15 +34,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const completePurchase = () => {
         setCartItems([]);
         localStorage.removeItem("cart.capputeeno");
+        toast.success("Compra finalizada", {
+            duration: 3000,
+            position: "top-center"
+        });
     };
 
-    const updateCartItem = (cartItem: ProductCartStorage, quantityValue: number) => {
-        let newCart = cartItems.map(cartElement => cartElement.id === cartItem.id && ({
-            ...cartElement,
-            quantity: quantityValue
-        }));
-        localStorage.setItem("cart.capputeeno", JSON.stringify(newCart));    
-    }
+    const updateCartItem = (itemId: string, quantity: number) => {
+        const newCart = cartItems.map(cartElement => 
+            cartElement.id === itemId ? { 
+                ...cartElement,  
+                quantity: quantity 
+            } : cartElement
+        );
+    
+        setCartItems(newCart);
+        localStorage.setItem("cart.capputeeno", JSON.stringify(newCart));
+    };
+    
 
     return (
         <CartContext.Provider value={{ cartItems, addItemToCart, removeItemFromCart, updateCartItem, completePurchase }}>

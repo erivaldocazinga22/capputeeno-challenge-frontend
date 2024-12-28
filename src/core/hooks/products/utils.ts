@@ -1,21 +1,7 @@
-import axios, { AxiosPromise } from "axios";
-import { ProductResponseData } from "@/core/models/products";
-import { env } from "@/lib/env.config";
+import { IProduct } from "@/core/models/products";
+import { axios } from "@/lib/axios.config";
+import { AxiosPromise } from "axios";
 
-export const getAllProducts = async (): AxiosPromise<ProductResponseData> => {
-    const query = `
-            query {
-                allProducts {
-                    id
-                    name
-                    description
-                    image_url
-                    category
-                    price_in_cents
-                    sales
-                    created_at
-                }
-            }
-    `;
-    return axios.post<ProductResponseData>(env.VITE_ROCKETSEAT_URL, { query });
+export const findProducts = async (): AxiosPromise<IProduct[]> => {
+    return await axios.get("/products");
 }

@@ -16,7 +16,9 @@ export const ProductCard = ({ data, href, className, ...props }: ProductCardProp
                 </div>
                 <div className="p-4 divide-y divide-slate-300">
                     <span className="block line-clamp-1 text-base pb-1.5">{data.name}</span>
-                    <span className="block font-bold text-black line-clamp-1 pt-1.5">{data.price_in_cents}</span>
+                    <span className="block font-bold text-black line-clamp-1 pt-1.5">
+                        {data.price_in_cents.toLocaleString("pt-AO", { style: "currency", currency: "AOA" })}
+                    </span>
                 </div>
             </div>
         </Link>

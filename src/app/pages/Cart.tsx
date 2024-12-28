@@ -6,8 +6,9 @@ import { StorageCard } from "../components/StorageCard";
 export default function Cart() {
     const { cartItems, completePurchase } = useCart();
 
-    const SubTotal = cartItems.reduce((acc, cartItem)=> acc + cartItem.price_in_cents, 0);
-    const Total = cartItems.length === 0 ? 0 : (SubTotal > 9000 ? SubTotal : SubTotal + 40);
+    const SubTotal = cartItems.reduce((acc, cartItem)=> acc + cartItem.price_in_cents * cartItem.quantity, 0);
+    const Frete = SubTotal > 25000 || SubTotal === 0 ? 0 : 1500;
+    const Total = SubTotal === 0 ? SubTotal : SubTotal + Frete;
 
     return (
         <div className="px-2 xl:w-4/5 h-[calc(100vh-5rem)] lg:mx-auto text-black overflow-y-auto">
@@ -16,7 +17,7 @@ export default function Cart() {
                 <div className="space-y-4 flex-1 pb-4 h-[calc(100vh-8.6rem)] overflow-y-auto ">
                     <div>
                         <h1 className="text-2xl font-semibold uppercase">Seu carrinho</h1>
-                        <p>Total ({cartItems.length} produtos) <span className="font-semibold">R${Math.ceil(SubTotal)}</span></p>
+                        <p>Total ({cartItems.length} produtos) <span className="font-semibold">{Math.ceil(SubTotal).toLocaleString("pt-AO", { style: "currency", currency: "AOA" })}</span></p>
                     </div>
                     {cartItems.map(cartItem => (
                         <StorageCard key={cartItem.id} data={cartItem} />
@@ -30,21 +31,21 @@ export default function Cart() {
                             <div className="flex flex-col w-full gap-3">
                                 <div className="flex items-center justify-between">
                                     <span className="text-nowrap">Subtotal de produtos</span>
-                                    <span className="text-nowrap text-right">R$ {SubTotal}</span>
+                                    <span className="text-nowrap text-right">{SubTotal.toLocaleString("pt-AO", { style: "currency", currency: "AOA"})}</span>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <span className="text-nowrap">Entrega</span>
-                                    <span className="text-nowrap text-right">R$ 40,00</span>
+                                    <span className="text-nowrap text-right">{Frete.toLocaleString("pt-AO", { style: "currency", currency: "AOA"})}</span>
                                 </div>
                             </div>
                             <span className="block w-full h-0.5 bg-slate-200"></span>
                             <div className="flex items-center justify-between">
                                 <span className="text-nowrap font-semibold">Total</span>
-                                <span className="text-nowrap text-right font-semibold">R$ {Total}</span>
+                                <span className="text-nowrap text-right font-semibold">{Total.toLocaleString("pt-AO", { style: "currency", currency: "AOA"})}</span>
                             </div>
                         </div>
 
-                        <button type="button" onClick={completePurchase} className="w-full px-4 py-2 rounded flex items-center justify-center gap-2 text-white bg-[#51B853]">
+                        <button type="button" disabled={Total === 0} onClick={completePurchase} className="w-full px-4 py-2 rounded flex items-center justify-center gap-2 text-white bg-[#51B853] disabled:bg-[#51B853]/70 disabled:cursor-not-allowed">
                             Finalizar a compra
                         </button>
                     </div>
