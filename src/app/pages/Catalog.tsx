@@ -1,14 +1,15 @@
 import { useSearchParams } from "react-router-dom";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { ProductCard } from "@/app/components/ProductCard";
 import { CatalogMenu } from "@/core/constants/catalog";
 import { useProducts } from "@/core/hooks/products";
+import { SkeletonProductCard } from "../components/SkeletonProductCard";
 
 export default function Catalog() {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { data } = useProducts();
+    const { data, isLoading } = useProducts();
 
     const viewerCard = searchParams.get("type") || "all";
 
@@ -126,12 +127,25 @@ export default function Catalog() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        {catalogBaseProducts?.map((catalogBaseProduct) => (
-                            <ProductCard
-                                key={catalogBaseProduct.id}
-                                href={`/product/${catalogBaseProduct.id}`}
-                                data={catalogBaseProduct}
-                            />
+                        {catalogBaseProducts ? 
+                            catalogBaseProducts.length === 0 ? (
+                                <div className="col-span-4 select-none h-[calc(100vh-250px)] text-slate-500 flex flex-col gap-4 items-center justify-center opacity-50">
+                                    <div className="rounded-full flex items-center justify-center p-8 bg-slate-300">
+                                        <ShoppingBag className="w-32 h-32" strokeWidth={1.5}/>
+                                    </div>
+                                    <p className="text-lg font-medium">Nenhum producto encontrado!</p>
+                                </div>
+                            ) : (
+                                catalogBaseProducts.map((catalogBaseProduct) => (
+                                    <ProductCard
+                                        key={catalogBaseProduct.id}
+                                        href={`/product/${catalogBaseProduct.id}`}
+                                        data={catalogBaseProduct}
+                                    />
+                                ))       
+                            )
+                        : isLoading && Array.from({ length: 10 }).map((_,index) => (
+                            <SkeletonProductCard key={index} />
                         ))}
                     </div>
                 </section>
